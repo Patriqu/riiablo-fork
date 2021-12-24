@@ -11,6 +11,16 @@ buildscript {
   dependencies {
     classpath "com.android.tools.build:gradle:$androidBuildToolsPluginVersion"
     classpath "gradle.plugin.io.netifi:gradle-flatbuffers-plugin:$flatbuffersPluginVersion"
+
+    constraints {
+      classpath("org.apache.logging.log4j:log4j-core") {
+        version {
+          strictly("[2.17, 3[")
+          prefer("2.17.0")
+        }
+        because("CVE-2021-44228: Log4j vulnerable to remote code execution")
+      }
+    }
   }
 
   dependencies {
@@ -41,8 +51,8 @@ allprojects {
 
 configure(subprojects - project(':android')) {
   apply plugin: 'java-library'
-  sourceCompatibility = JavaVersion.VERSION_1_8
-  targetCompatibility = JavaVersion.VERSION_1_8
+  sourceCompatibility = JavaVersion.VERSION_16
+  targetCompatibility = JavaVersion.VERSION_16
   compileJava {
     options.incremental = true
   }

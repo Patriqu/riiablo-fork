@@ -54,3 +54,8 @@ jar {
     file(archiveFile).setExecutable(true, false)
   }
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
+}

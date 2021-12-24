@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 30
+  compileSdkVersion 31
+  buildToolsVersion "32.0.0"
   sourceSets {
     main {
       manifest.srcFile 'AndroidManifest.xml'
@@ -19,10 +20,11 @@ android {
   defaultConfig {
     applicationId "com.riiablo"
     minSdkVersion 23
-    targetSdkVersion 30
+    targetSdkVersion 31
     versionCode 1
     versionName "$version"
     archivesBaseName = "$appName-$version"
+    multiDexEnabled true
   }
   buildTypes {
     release {
@@ -31,8 +33,9 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    coreLibraryDesugaringEnabled true
+    sourceCompatibility JavaVersion.VERSION_16
+    targetCompatibility JavaVersion.VERSION_16
   }
   productFlavors {
   }
@@ -51,6 +54,7 @@ dependencies {
 }
 
 dependencies {
+  coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
   implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
   natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi-v7a"
   natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-arm64-v8a"
